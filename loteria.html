@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Loteria</title>
+    <style>
+        /* Estilo básico para centralizar o conteúdo e melhorar a aparência */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #numeros {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simulador de Loteria</h1>
+    <button onclick="simularLoteria()">Gerar Números</button>
+    <div id="numeros"></div>
+
+    <script>
+        // Constantes para definir a quantidade de números e o valor máximo
+        const QUANTIDADE_NUMEROS = 6;
+        const MAXIMO_NUMERO = 60;
+
+        // Função para gerar números aleatórios únicos
+        function gerarNumerosAleatorios(quantidade, maximo) {
+            // Validação dos parâmetros de entrada
+            if (quantidade <= 0 || maximo <= 0) {
+                throw new Error("Quantidade e máximo devem ser maiores que zero.");
+            }
+
+            const numeros = new Set();
+            // Loop para gerar números aleatórios até atingir a quantidade desejada
+            while (numeros.size < quantidade) {
+                const numeroAleatorio = Math.floor(Math.random() * maximo) + 1;
+                numeros.add(numeroAleatorio);
+            }
+            // Retorna os números como um array
+            return Array.from(numeros);
+        }
+
+        // Função principal para simular a loteria
+        function simularLoteria() {
+            // Gera os números sorteados
+            const numerosSorteados = gerarNumerosAleatorios(QUANTIDADE_NUMEROS, MAXIMO_NUMERO);
+            // Exibe os números sorteados no elemento HTML
+            document.getElementById("numeros").innerText = "Números sorteados: " + numerosSorteados.join(", ");
+        }
+    </script>
+</body>
+</html>
